@@ -1,0 +1,30 @@
+.product-list{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.product-list ul li{
+    display: inline-block;
+    border: 1px solid skyblue;
+    padding:5px;
+    width: 150px;
+    margin: 0pxpx;
+
+}
+
+.product-list ul{
+    margin: 10px;
+    
+}
+
+.deletProduct-btn{
+    background-color: #094480;
+    color: white;
+    cursor: pointer;
+    margin: 1px;
+    text-decoration: none;
+}
+
+.updateProduct-btn{
+    text-decoration: none;
+}
