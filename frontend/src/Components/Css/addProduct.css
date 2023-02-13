@@ -1,0 +1,22 @@
+.product{
+    margin-left: 30%;
+}
+
+.inputbox{
+    display: block;
+    margin: 25px;
+    padding: 7px;
+    width: 300px;
+    border: 1px solid skyblue;
+
+}
+
+.addProduct-btn{
+    background-color: #094480;
+    color: white;
+    font-size: 20px;
+    padding: 10px 60px;
+    border-radius: 5px;
+    margin:60px;
+    cursor: pointer;
+}

@@ -1,0 +1,28 @@
+.inputbox{
+    display: block;
+    margin: 25px;
+    padding: 7px;
+    width: 300px;
+    border: 1px solid skyblue;
+
+}
+
+.login{
+    margin-left: 30%;
+    margin-top: 100px;
+}
+
+.loginText{
+    margin: 3%;
+}
+.signup-btn{
+    background-color: #094480;
+    color: white;
+    font-size: 20px;
+    padding: 10px 60px;
+    border-radius: 5px;
+    margin:70px;
+    margin-left: 7%;
+    margin-top: 0px ;
+    cursor: pointer;
+}
