@@ -4,6 +4,8 @@ require('./db/config');
 const User = require("./db/User");
 const app = express();
 const Product = require("./db/Product");
+const Jwt = require('jsonwebtoken');
+const jwtKey = 'nayuEcom' 
 app.use(express.json());
 app.use(cors( ));
 
@@ -13,7 +15,12 @@ app.post("/register", async (req,resp)=>{
     let result = await user.save();
     result = result.toObject();
     delete result.password;
-    resp.send(result);
+    Jwt.sign({ user }, jwtKey,{ expiresIn: "2h" }, (err, token) => { 
+        if(err){
+            resp.send({result:"Something Went Wrong, Try again later!!!"});
+        }
+        resp.send({user , auth: token})
+})
 })
 
 //LOGIN API
@@ -22,7 +29,13 @@ app.post("/login", async (req,resp)=>{
         let user = await User.findOne(req.body).select("-password");
         //console.log(user);
         if(user){
-            resp.send(user);
+            Jwt.sign({ user }, jwtKey,{ expiresIn: "2h" }, (err, token) => { 
+                if(err){
+                    resp.send({result:"Something Went Wrong, Try again later!!!"});
+                }
+                resp.send({user , auth: token})
+        })
+            
         }else{
             resp.send({result:"No User Found"});
         }
@@ -77,7 +90,22 @@ app.put("/product/:id",async(req,resp)=>{
         }
     )
     resp.send(result)
-})
+});
+
+//Search APi
+
+app.get('/search/:key', async(req,resp)=>{
+    let result = await Product.find({
+        "$or":[
+            {name:{$regex: req.params.key}},
+            {company:{$regex: req.params.key}},
+            {category:{$regex: req.params.key}}
+        ]
+        
+    });
+    resp.send(result) 
+
+});
 
 
 app.listen(5000);

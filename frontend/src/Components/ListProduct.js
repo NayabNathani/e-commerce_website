@@ -10,7 +10,11 @@ const ListProduct = ()=>{
     },[])
 
     const getProducts= async ()=>{
-        let result = await fetch("http://localhost:5000/products");
+        let result = await fetch("http://localhost:5000/products",{
+            headers:{
+                authorization: JSON.parse(localStorage.getItem('token'))
+            }
+        });
         result = await result.json();
         setProducts(result);
     }
@@ -27,9 +31,26 @@ const ListProduct = ()=>{
         }
     };
 
+    const searchProduct = async(event)=>{
+        let key = event.target.value;
+        if(key){
+        let result = await fetch(`http://localhost:5000/search/${key}`);
+        result = await result.json();
+        if(result){
+            setProducts(result); 
+        }}else{
+            getProducts();
+        }
+
+
+    }
+
     return(
         <div className="product-list">
             <h3>Product List</h3>
+            <input className="searchBar" type="text" placeholder="Search Product"
+            onChange={searchProduct}
+            />
             <ul>
                 <li>S/No </li>
                 <li>Name</li>
@@ -39,7 +60,7 @@ const ListProduct = ()=>{
                 <li>Operation</li>
             </ul>
             {
-                products.map((item, index)=>
+                products.length>0 ? products.map((item, index)=>
                 <ul key={item._id}>
                 <li>{index+1}</li>
                 <li>{item.name}</li>
@@ -52,6 +73,7 @@ const ListProduct = ()=>{
                 </li>
             </ul>
                 )
+                :<h1>No Product Found!!!</h1>
             }
         </div>
 

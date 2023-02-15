@@ -28,3 +28,11 @@
 .updateProduct-btn{
     text-decoration: none;
 }
+
+.searchBar{
+    width: 400px;
+    margin: 20px;
+    height: 40px;
+    border: 1px solid skyblue;
+    
+}
